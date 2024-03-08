@@ -1,13 +1,14 @@
+<script setup lang="ts">
+const route = useRoute()
+console.log(route.params.id)
+</script>
+
 <template>
-    <div>
-      <h1> Liste des bières côtés serveur</h1>
-      <ul>
-        <li v-for="biere in bieres" :key="biere.id">{{ biere.name }}</li>
-      </ul>
-    </div>
-  </template>
-  
-  <script>
+    <h2 v-for="biere in bieres" :key="biere.id"><img :src="biere.image"><NuxtLink to="/bieres-client/1">{{ biere.name }}</NuxtLink></h2>
+    
+</template>
+
+<script>
   import { ref, onMounted } from 'vue';
   
   export default {

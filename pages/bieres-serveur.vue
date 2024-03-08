@@ -1,6 +1,6 @@
 <template>
     <div>
-      <h1>Liste des bières IPA (Côté Client)</h1>
+      <h1>Liste des bières IPA (Côté serveur)</h1>
       <ul>
         <li v-for="biere in bieres" :key="biere.id">{{ biere.name }}</li>
       </ul>
