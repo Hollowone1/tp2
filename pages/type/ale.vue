@@ -3,7 +3,7 @@
     <div>
     <h2 v-for="biere in bieres" :key="biere.id">
       <img :src="biere.image" />
-      <NuxtLink :to="`/bieres-client/${biere.id}`">{{ biere.name }}</NuxtLink>
+      <NuxtLink :to="`/${biere.id}`">{{ biere.name }}</NuxtLink>
       <p>{{biere.price}}</p>
     </h2>
     
