@@ -21,22 +21,21 @@
   const route = useRoute();
   const router = useRouter();
 
-  const priceMax = ref<number>(route.query.pricemax ? parseFloat(route.query.pricemax as string) : 10);
-  const bieres = ref<any[]>([]); 
+  const priceMax = ref<number>(route.query.pricemax ? parseFloat(route.query.pricemax as string) : 0);
+  const bieres = ref<any>([]); 
   const beerType = ref(route.params.type);
   
   const fetchBieres = async () => {
     try {
-      const response = await fetch(`https://api.sampleapis.com/beers/${beerType}`);
-      const data = await response.json();
-      bieres.value = data;
+      const response = await $fetch(`https://api.sampleapis.com/beers/${beerType}`);
+      bieres.value = response;
     } catch (error) {
       console.error(error);
     }
 }
   
   const bieresFiltered = computed(() => {
-  return bieres.value.filter((biere) => biere.price <= priceMax.value);
+  return bieres.value.filter((biere:any) => biere.price <= priceMax.value);
 });
 
 const filterBieres = () => {
