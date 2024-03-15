@@ -16,7 +16,7 @@
   
       const fetchBieres = async () => {
         try {
-          const response = await fetch('https://api.sampleapis.com/beers/ale');
+          const response = await fetch('https://api.sampleapis.com/beers/');
           const data = await response.json();
           bieres.value = data;
         } catch (error) {
