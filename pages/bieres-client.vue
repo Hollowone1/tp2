@@ -23,16 +23,17 @@
 
   const priceMax = ref<number>(route.query.pricemax ? parseFloat(route.query.pricemax as string) : 10);
   const bieres = ref<any[]>([]); 
+  const beerType = ref(route.params.type);
   
   const fetchBieres = async () => {
     try {
-      const response = await fetch('https://api.sampleapis.com/beers/ale');
+      const response = await fetch(`https://api.sampleapis.com/beers/${beerType}`);
       const data = await response.json();
       bieres.value = data;
     } catch (error) {
       console.error(error);
     }
-  };
+}
   
   const bieresFiltered = computed(() => {
   return bieres.value.filter((biere) => biere.price <= priceMax.value);
