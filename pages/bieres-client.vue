@@ -1,20 +1,28 @@
 <template>
     <div>
+        <h2>filtrer les bières</h2>
+    <input type="number" v-model.number="priceMax" />
+    <button @click="filterBieres">Filtrer</button>
+    </div>
+    <div>
       <h2 v-for="biere in bieres" :key="biere.id">
         <img :src="biere.image" />
         <NuxtLink :to="`/bieres-client/${biere.id}`">{{ biere.name }}</NuxtLink>
+        <p>{{biere.price}}</p>
       </h2>
+      
     </div>
   </template>
   
   <script setup lang="ts">
-  import { ref, onMounted } from 'vue';
-  import { useRoute } from 'vue-router';
+  import { ref,computed, onMounted } from 'vue';
+  import { useRoute,useRouter } from 'vue-router';
   
   const route = useRoute();
-  console.log(route.params.id);
-  
-  const bieres = ref<any[]>([]);
+  const router = useRouter();
+
+  const priceMax = ref<number>(route.query.pricemax ? parseFloat(route.query.pricemax as string) : 10);
+  const bieres = ref<any[]>([]); 
   
   const fetchBieres = async () => {
     try {
@@ -26,5 +34,14 @@
     }
   };
   
-  onMounted(fetchBieres);
+  const bieresFiltered = computed(() => {
+  return bieres.value.filter((biere) => biere.price <= priceMax.value);
+});
+
+const filterBieres = () => {
+  const query = { pricemax: priceMax.value.toString() };
+  router.push({ query });
+};
+
+onMounted(fetchBieres);
   </script>
