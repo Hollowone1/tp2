@@ -12,10 +12,7 @@
 </template>
 
 <script setup lang="ts">
-definePageMeta({
-  path: '/type/:type',
-  layout: 'custom'
-})
+
 
 import { ref,computed, onMounted } from 'vue';
 import { useRoute,useRouter } from 'vue-router';
@@ -28,9 +25,8 @@ const bieres = ref<any[]>([]);
 
 const fetchBieres = async () => {
 try {
-  const response = await fetch('https://api.sampleapis.com/beers/red-ale');
-  const data = await response.json();
-  bieres.value = data;
+  const response = await $fetch('https://api.sampleapis.com/beers/red-ale');
+    bieres.value = response
 } catch (error) {
   console.error(error);
 }
